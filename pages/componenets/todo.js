@@ -1,9 +1,8 @@
 import React from "react"
 import Title from "./title"
-// const handleClick = (e) => {
-//   e.preventDefault()
-//   console.log(e.target.childNodes[0].textContent)
-// }
+import Icones from "./icones"
+import Liste from "./liste"
+import InputForm from "./inputForm"
 
 const style={
   div:"w-60 flex justify-between font-bold capitalize text-lg text-center border-2 border-slate-200 rounded-md bg-white p-6 cursor-pointer hover:scale-105 selected-items",
@@ -14,6 +13,7 @@ const style={
 
 export default function Todo(props) {
   return (
+    <>
     <div    className={style.div}>
        <Title />
        <span className={style.spanWrapper}>
@@ -21,5 +21,13 @@ export default function Todo(props) {
           <span className={style.spanSecond}>0</span>
        </span>
     </div>
+    <hr className="line  h-px bg-gray-200 border-0 dark:bg-gray-700"></hr>
+    <Icones />
+    <Liste name="pdo" />
+    <Liste name="Symphony" />
+    <Liste name="Larval" />
+  
+    </>
+
   )
 }

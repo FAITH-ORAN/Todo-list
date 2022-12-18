@@ -23,11 +23,9 @@ export default function Home() {
           <h1 className="text-3xl font-extrabold underline decoration-blue-500 ">My todoList</h1>
         </div>
         <Todo />
-        <hr className="line  h-px bg-gray-200 border-0 dark:bg-gray-700"></hr>
-        <Icones />
-        <List name="test" />
-        <List name="apprendre l'algorithme" />
-        <List name="bdd" />
+        
+     
+       
       </div>
     </div>
   )

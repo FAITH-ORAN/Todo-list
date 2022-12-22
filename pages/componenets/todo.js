@@ -3,6 +3,7 @@ import Title from "./title"
 import Icones from "./icones"
 import Liste from "./liste"
 import InputForm from "./inputForm"
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons"
 
 const style={
   div:"w-60 flex justify-between font-bold capitalize text-lg text-center border-2 border-slate-200 rounded-md bg-white p-6 cursor-pointer hover:scale-105 selected-items",
@@ -11,11 +12,11 @@ const style={
   spanSecond: "right table-cell align-middle pl-3 pr-3  text-sm unselected-items"
 }
 
-export default function Todo(props) {
+export default function Todo({list}) {
   return (
     <>
-    <div    className={style.div}>
-       <Title />
+    <div className={style.div}>
+       <Title title={list.title} />
        <span className={style.spanWrapper}>
           <span className={style.spanFirst}>0</span>
           <span className={style.spanSecond}>0</span>
@@ -23,9 +24,9 @@ export default function Todo(props) {
     </div>
     <hr className="line  h-px bg-gray-200 border-0 dark:bg-gray-700"></hr>
     <Icones />
-    <Liste name="pdo" />
-    <Liste name="Symphony" />
-    <Liste name="Larval" />
+    {list.todos.map((todo)=>{
+      return <Liste key={todo.id} todo={todo}  />
+    })}
   
     </>
 

@@ -1,15 +1,14 @@
 /* eslint-disable @next/next/no-sync-scripts */
-import React from "react"
+import React,{useState} from "react"
 import Todo from "./componenets/todo"
-import Icones from "./componenets/icones"
-import Link from "next/link"
+import store from "./utils/store"
 import Head from "next/head"
-import List from "./componenets/Liste"
 import styles from "../styles/Home.module.css"
 
-
 export default function Home() {
-  return (
+  const [data,setData]=useState(store)
+
+return (
     <div className={styles.container} >
       <Head>
         <title>Create Next App</title>
@@ -22,10 +21,11 @@ export default function Home() {
         <div className="text-center mt-4 mb-4 header">
           <h1 className="text-3xl font-extrabold underline decoration-blue-500 ">My todoList</h1>
         </div>
-        <Todo />
-        
-     
-       
+         {data.listIds.map((listId)=>{
+          const list= data.lists[listId]
+
+            return <Todo list={list} key={listId}/>
+         })}
       </div>
     </div>
   )

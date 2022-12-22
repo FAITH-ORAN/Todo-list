@@ -11,7 +11,7 @@ const SignupSchema = Yup.object().shape({
 })
 
 
-export default function Title() {
+export default function Title({title}) {
   const [open, setOpen]= useState()
 
   
@@ -28,10 +28,12 @@ return (
             // same shape as initial values
             console.log(values)
           }}
+
        >
           {({ errors, touched }) => (
             <Form>
-              <Field name="description" className="border-none focus:outline-0 w-12"  />
+              <Field value ={title} name="description" className="border-none focus:outline-0 w-12" 
+              onBlur={()=>setOpen(!open)}  />
               {errors.description && touched.description ? (
              <div>{errors.description}</div>
            ) : null}
@@ -40,7 +42,7 @@ return (
 
         </Formik>
         ):(
-          <div onClick={()=>setOpen(!open)}>Php</div>
+          <div onClick={()=>setOpen(!open)}>{title}</div>
       )}
        
        

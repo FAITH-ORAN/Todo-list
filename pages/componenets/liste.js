@@ -9,13 +9,13 @@ const style ={
 }
 
 
-export default function Liste(props) {
+export default function Liste({todo}) {
 return (
       
         <div className={style.li}>
           <div className={style.div}>
             <input type="checkbox" className={style.input}/>
-            <label className={style.label}>{props.name}</label>
+            <label className={style.label}>{todo.content}</label>
           </div>
         </div>
       

@@ -7,7 +7,7 @@ const style ={
   wrapper:" flex  md:justify-between sm:justify-between m-3  text-2xl  icone-wrapper ",
 }
 
-export default function Icones () {
+export default function Icones ({listId}) {
   const [open,setOpen] =useState()
   function openModal() {
     setOpen(true)
@@ -34,13 +34,14 @@ return (
             <i className="fas fa-check-circle ml-4 cursor-pointer"></i>
         </div>
         <Modal
+        ariaHideApp={false} 
         isOpen={open}
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         contentLabel="Example Modal" >
         <h1 className="text-3xl text-bold">Ajouter une tâche</h1>
         <div className="flex ">
-          <InputForm setOpen={setOpen}/>
+          <InputForm setOpen={setOpen} listId={listId} />
           <i className="fas fa-times ml-4 cursor-pointer mt-4 justify-between" onClick={closeModal}></i>
         </div>
       </Modal>

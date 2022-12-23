@@ -9,7 +9,7 @@ const variants = {
 
 const sizes = {
     medium: "inline-block px-6 py-2.5 rounded-full leading-tight",
-    large : "inline-block px-7 py-3  rounded-full leading-tight",
+    large : "inline-block px-7 py-3 mt-3  rounded-full leading-tight",
     rounded :"w-3 h-3 rounded-full"
 }
 

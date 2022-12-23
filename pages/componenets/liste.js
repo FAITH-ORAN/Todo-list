@@ -15,7 +15,7 @@ return (
         <div className={style.li}>
           <div className={style.div}>
             <input type="checkbox" className={style.input}/>
-            <label className={style.label}>{todo.content}</label>
+            <label className={style.label}>{todo.title}</label>
           </div>
         </div>
       

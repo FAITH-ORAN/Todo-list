@@ -19,7 +19,7 @@ export default function UpdateTitle() {
 
         <Formik 
           initialValues={{
-         description: " test",
+         description: " ",
           
         }}
           validationSchema={SignupSchema}

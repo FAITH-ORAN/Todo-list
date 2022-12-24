@@ -10,24 +10,30 @@ const SignupSchema = Yup.object().shape({
   .max(50, "Too Long!")
 })
 
-
-export default function InputForm({setOpen,listId}) {
-  const {addMoreTodo}= useContext(storeApi)
-  const [todoTitle,setTodoTitle]=useState("")
+export default function InputForm({setOpen,listId,type}) {
+  const {addMoreTodo,addMoreList}= useContext(storeApi)
+  const [title,setTitle]=useState("")
 
   const handleOnChange=(e)=>{
-    setTodoTitle(e.target.value)
+    setTitle(e.target.value)
   }
 
   const handleBtnConfirm=(e)=>{
+    if(type!="todo") {
     e.preventDefault()
-    addMoreTodo(todoTitle,listId)
-    setTodoTitle("")
+    addMoreTodo(title,listId)
+    setTitle("")
     setOpen(false)
+    }
+    else{
+      addMoreList(title)
+      setTitle("")
+      setOpen(false)
+    }
   }
   const handleBlur=()=>{
     setOpen(false)
-    setTodoTitle("")
+    setTitle("")
   }
 
 
@@ -43,9 +49,10 @@ return (
           <Form onChange={handleOnChange} >
             <Field id ="description" name="description" className=" bg-gray-50  border border-gray-300 text-gray-900 text-lg rounded-lg focus:border-blue-500 block mt-3 ml-2  p-2.5"
               onBlur={handleBlur}
-              value={todoTitle}
+              value={title}
+              placeholder={type==="todo"? "entrez une todo liste":"entrez une tâche"}
               />
-            <Button onClick={handleBtnConfirm}>Ajouter</Button> {/* click on button doesnt work !! please click on enter */ }
+            <Button onClick={handleBtnConfirm}>{type==="todo"? "+ todo": "+ tâche"}</Button> {/* click on button doesnt work !! please click on enter */ }
           </Form>
         </Formik>
     </div>

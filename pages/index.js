@@ -1,13 +1,28 @@
 /* eslint-disable @next/next/no-sync-scripts */
 import React,{useState} from "react"
+import Modal from "react-modal"
 import {v4 as uuid} from "uuid"
 import Todo from "./componenets/todo"
+import Button from "./componenets/button"
+import InputForm from "./componenets/inputForm"
+import Icones from "./componenets/icones"
 import store from "./utils/store"
 import StoreApi from "./utils/storeApi"
 import Head from "next/head"
 import styles from "../styles/Home.module.css"
 
 export default function Home() {
+  const [open,setOpen] =useState()
+  function openModal() {
+    setOpen(true)
+  }
+  function afterOpenModal() {
+    
+  }
+  function closeModal() {
+    setOpen(false)
+  }
+
   const [data,setData]=useState(store)
   const addMoreTodo=(title,listId)=>{
     const newTodoId = uuid()
@@ -27,9 +42,26 @@ list.todos=[...list.todos,newTodo]
    }
    setData(newState)
    }
+   const addMoreList=(title)=>{
+      const newListId=uuid()
+      
+      const newList={
+        id:newListId,
+        title,
+        todos:[]
+      }
+      const newState={
+        listIds:[...data.listIds,newListId],
+        lists:{
+          ...data.lists,
+          [newListId]:newList
+        }
+      }
+      setData(newState)
+   }
 
 return (
-     <StoreApi.Provider value={{ addMoreTodo }}>
+     <StoreApi.Provider value={{ addMoreTodo,addMoreList }}>
       <div className={styles.container} >
         <Head>
           <title>Create Next App</title>
@@ -38,16 +70,35 @@ return (
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossOrigin="anonymous" referrerPolicy="no-referrer" />
           <script src="https://cdn.tailwindcss.com"></script>
         </Head>
-        <div className="m-0 bg-zinc-50 font-sans">
+        <div className="m-0 bg-zinc-50 font-sans overflow-x-hidden">
           <div className="text-center mt-4 mb-4 header">
             <h1 className="text-3xl font-extrabold underline decoration-blue-500 ">My todoList</h1>
+          </div>
+          <div className="relative">
+            <Button variant="add" size="medium" onClick={openModal}><i className="fas fa-plus" ></i></Button>
+          </div>
+          <div className="absolute flex mt-12">
+            <Icones />
           </div>
           {data.listIds.map((listId)=>{
             const list= data.lists[listId]
 
               return <Todo list={list} key={listId}/>
           })}
+          
         </div>
+        <Modal
+        ariaHideApp={false} 
+        isOpen={open}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        contentLabel="Example Modal" >
+        <h1 className="text-3xl text-bold">Ajouter une Todo liste</h1>
+        <div className="flex ">
+          <InputForm setOpen={setOpen} type="todo" />
+          <i className="fas fa-times ml-4 cursor-pointer mt-4 justify-between" onClick={closeModal}></i>
+        </div>
+      </Modal>
       </div>
     </StoreApi.Provider>
   )
